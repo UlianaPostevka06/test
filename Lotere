@@ -1,0 +1,29 @@
+#підключення модулів
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QVBoxLayout
+from random import randint
+#головне вікно
+app = QApplication([])
+main_win = QWidget()
+main_win.setWindowTitle('Визначник переможця')
+main_win.move(100,100)
+main_win.resize(400,200)
+main_win.show()
+#віджети вікна: кнопка і напис
+button = QPushButton('Випробувати удачу')
+label = QLabel('Натисніть, щоб взяти участь')
+winner = QLabel('?')
+#розташування віджетів
+line = QVBoxLayout()
+line.addWidget(label, alignment= Qt.AlignCenter)
+line.addWidget(winner, alignment= Qt.AlignCenter)
+line.addWidget(button, alignment= Qt.AlignCenter)
+main_win.setLayout(line)
+#функція яка генерує і показує число
+def show_winner():
+    number = randint(0, 9)
+    winner.setText(str(number))
+    label.setText('Переможець!')
+#обробка натискання на кнопку
+button.clicked.connect(show_winner)
+app.exec_()
